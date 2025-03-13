@@ -45,9 +45,11 @@ public class AppTest {
     @Test
     public void testMailRu() {
         try {
+            AppTest text = new AppTest();
+
             String user_names = page.locator("(//div[@id='login_credentials'])").textContent();
             String regex_user = "[a-zA-Z0-9]+(_user)";
-            AppTest text = new AppTest();
+
             String user_name_login = text.Pars(regex_user,user_names);
             System.out.println(user_name_login);
             page.locator("//input[@id='user-name']").fill(user_name_login);
@@ -56,8 +58,8 @@ public class AppTest {
             String regex_password = "[a-zA-Z0-9]+(_sauce)";
             String password = text.Pars(regex_password,users_password);
             System.out.println(password);
-
             page.locator("//input[@id='password']").fill(password);
+
             page.locator("//input[@id='login-button']").click();
             page.locator("//div[@class='right_component']").click();
 
@@ -85,31 +87,27 @@ public class AppTest {
             }
             page.locator("//div[@id='shopping_cart_container']/a").click();
 
-            Locator price_list = page.locator("//div[@id='cart_contents_container']");
             float prise = 0;
             float max_price=0;
             float min_price=1000;
-            int index=0;
+            int index_max=0;
+            int index_min=0;
             String regex_price = "[0-9.]+";
             for (int i = 1; i <= 6; i++) {
-                String priseTextPage = (String) price_list.locator(String.format("(//div[@class='inventory_item_price'])[%d]",i)).textContent();
+                String priseTextPage = (String) page.locator(String.format("(//div[@id='cart_contents_container']//div[@class='inventory_item_price'])[%d]",i)).textContent();
                 prise = Float.parseFloat(text.Pars(regex_price,priseTextPage));
                 if ( prise > max_price) {
                     max_price = prise;
-                    index = i;
+                    index_max = i;
                 }
-            }
-            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index)).click();
-
-            for (int i = 1; i <= 5; i++) {
-                String priseTextPage = (String) price_list.locator(String.format("(//div[@class='inventory_item_price'])[%d]",i)).textContent();
-                prise = Float.parseFloat(text.Pars(regex_price,priseTextPage));
-                if ( prise < min_price) {
+                if (prise <min_price) {
                     min_price = prise;
-                    index = i;
+                    index_min = i;
                 }
             }
-            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index)).click();
+
+            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index_max)).click();
+            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index_min)).click();
 
             page.locator("//button[@id='checkout']").click();
 
