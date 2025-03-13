@@ -105,10 +105,12 @@ public class AppTest {
                     index_min = i;
                 }
             }
-
+            if (index_min>index_max){
+                index_min--;
+            }
             page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index_max)).click();
             page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index_min)).click();
-
+            page.waitForTimeout(10000);
             page.locator("//button[@id='checkout']").click();
 
             page.locator("(//div[@class='form_group']//input)[1]").fill("Ivan");
