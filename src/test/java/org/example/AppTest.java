@@ -74,7 +74,7 @@ public class AppTest {
 
             String targetText= "Add to cart";
             int count = 0;
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i < 6; i++) {
                 if (count < 3) {
                     String textButton = page.locator(String.format("(//div[@id='inventory_container'][1]//button)[%d]", i)).textContent();
                     if (targetText.equals(textButton)) {
@@ -86,13 +86,13 @@ public class AppTest {
             page.locator("//div[@id='shopping_cart_container']/a").click();
 
             Locator price_list = page.locator("//div[@id='cart_contents_container']");
-            float prise = 0;
+            float prise ;
             float max_price=0;
             float min_price=1000;
             int index=0;
             String regex_price = "[0-9.]+";
             for (int i = 1; i <= 6; i++) {
-                String priseTextPage = (String) price_list.locator(String.format("(//div[@class='inventory_item_price'])[%d]",i)).textContent();
+                String priseTextPage =  price_list.locator(String.format("(//div[@class='inventory_item_price'])[%d]",i)).textContent();
                 prise = Float.parseFloat(text.Pars(regex_price,priseTextPage));
                 if ( prise > max_price) {
                     max_price = prise;
@@ -102,7 +102,7 @@ public class AppTest {
             page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index)).click();
 
             for (int i = 1; i <= 5; i++) {
-                String priseTextPage = (String) price_list.locator(String.format("(//div[@class='inventory_item_price'])[%d]",i)).textContent();
+                String priseTextPage =  price_list.locator(String.format("(//div[@class='inventory_item_price'])[%d]",i)).textContent();
                 prise = Float.parseFloat(text.Pars(regex_price,priseTextPage));
                 if ( prise < min_price) {
                     min_price = prise;
