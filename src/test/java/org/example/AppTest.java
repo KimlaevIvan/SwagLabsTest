@@ -41,10 +41,24 @@ public class AppTest {
         return "text not found ";
         }
     }
+    public void CheckBuy(int NumPurch) {
+        String targetText= "Add to cart";
+        int count=0;
+        for (int i = 1; i < 6; i++) {
+            if (count < NumPurch) {
+                String textButton = page.locator(String.format("(//div[@id='inventory_container'][1]//button)[%d]", i)).textContent();
+                if (targetText.equals(textButton)) {
+                    page.locator(String.format("(//div[@id='inventory_container'][1]//button)[%d]", i)).click();
+                    count++;
+                }
+            }
+        }
+    }
 
     @Test
     public void testMailRu() {
         try {
+            int NumPurch=3;
             String user_names = page.locator("(//div[@id='login_credentials'])").textContent();
             String regex_user = "[a-zA-Z0-9]+(_user)";
             AppTest text = new AppTest();
@@ -65,33 +79,40 @@ public class AppTest {
             sort.click();
             sort.selectOption("hilo");
 
-            page.locator("(//div[@id='inventory_container'][1]//button)[1]").click();
-            page.locator("(//div[@id='inventory_container'][1]//button)[2]").click();
-            page.locator("(//div[@id='inventory_container'][1]//button)[3]").click();
+            CheckBuy(NumPurch);
 
             sort.click();
             sort.selectOption("lohi");
+
+            CheckBuy(NumPurch);
 
             page.locator("//div[@id='shopping_cart_container']/a").click();
 
             float prise;
             float max_price=0;
             float min_price=1000;
-            int index=0;
+            int index_max=0;
+            int index_min=0;
             String regex_price = "[0-9.]+";
             for (int i = 1; i <= 6; i++) {
                 String priseTextPage = page.locator(String.format("(//div[@id='cart_contents_container']//div[@class='inventory_item_price'])[%d]",i)).textContent();
                 prise = Float.parseFloat(text.Pars(regex_price,priseTextPage));
                 if ( prise > max_price) {
                     max_price = prise;
-                    index = i;
+                    index_max = i;
                 }
                 if (prise <min_price) {
                     min_price = prise;
-                    index = i;
+                    index_min = i;
                 }
             }
-            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index)).click();
+            if (index_min>index_max){
+                index_min--;
+            }
+
+            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index_max)).click();
+            page.locator(String.format("(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",index_min)).click();
+            page.waitForTimeout(10000);
 
             page.locator("//button[@id='checkout']").click();
 
