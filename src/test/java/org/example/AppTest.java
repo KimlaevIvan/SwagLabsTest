@@ -43,8 +43,8 @@ public class AppTest {
             cardPage.CheckBuy();
             CheckoutPage checkoutPage = new CheckoutPage(page);
             checkoutPage.information();
-            FinishPage finishPage = new FinishPage();
-            //finishPage.CheckingImg();
+            FinishPage finishPage = new FinishPage(page);
+            finishPage.CheckingImg();
 
             page.waitForTimeout(3000);
         } catch (PlaywrightException e) {
