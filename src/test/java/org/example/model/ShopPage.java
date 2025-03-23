@@ -12,7 +12,7 @@ public class ShopPage {
     private String ShoppingCartButton = "//div[@id='shopping_cart_container']/a";
     public String SortButton = "//select[@class='product_sort_container']";
     public String ButtonBuy = "(//div[@id='inventory_container'][1]//button)[%d]";
-    private void clickShoppingCartButton (){page.click(ShoppingCartButton);}
+    public void clickShoppingCartButton (){page.click(ShoppingCartButton);}
 
     public void  clickHiLoButtonSort(){
         Locator sort = page.locator(SortButton);
@@ -21,7 +21,7 @@ public class ShopPage {
         sort.selectOption("hilo");
         buy.CheckBuy(NumPurch,ButtonBuy);
     }
-    private void clickLoHiButtonSort(){
+    public void clickLoHiButtonSort(){
         Locator sort = page.locator(SortButton);
         CheckBuyUtils buy = new CheckBuyUtils(page);
         sort.click();

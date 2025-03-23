@@ -32,6 +32,10 @@ public class AppTest {
         }
     }
 
+    public Page getPage() {
+        return page; // Метод для получения текущей страницы
+    }
+
     @Test
     public void testMailRu() {
         try {
