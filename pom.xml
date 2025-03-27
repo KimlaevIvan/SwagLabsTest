@@ -18,6 +18,23 @@
 
   <dependencies>
     <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>7.0.0</version> <!-- Убедитесь, что используете последнюю версию -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>7.0.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>1.2.4</version>
+    </dependency>
+    <dependency>
       <groupId>com.microsoft.playwright</groupId>
       <artifactId>playwright</artifactId>
       <version>1.20.0</version>
