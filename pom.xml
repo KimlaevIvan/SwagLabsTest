@@ -20,14 +20,12 @@
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>7.0.0</version> <!-- Убедитесь, что используете последнюю версию -->
-      <scope>test</scope>
+      <version>7.11.0</version> <!-- Замените на актуальную версию -->
     </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit</artifactId>
-      <version>7.0.0</version>
-      <scope>test</scope>
+      <version>7.11.0</version>
     </dependency>
     <dependency>
       <groupId>info.cukes</groupId>
@@ -42,7 +40,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.1</version>
+      <version>5.9.0</version>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>

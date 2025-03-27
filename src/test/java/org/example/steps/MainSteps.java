@@ -1,53 +1,84 @@
 package org.example.steps;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
-import cucumber.api.junit.Cucumber;
+
+import io.cucumber.java.bg.И;
+import io.cucumber.java.en.When;
 import org.example.AppTest;
+import org.example.model.CardPage;
 import org.example.model.LoginPage;
 import org.example.model.ShopPage;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertArrayEquals;
-
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "src/test/resources/features",
-        glue = "ru.savkk.test",
-        tags = "@all",
-        dryRun = false,
-        strict = false,
-        snippets = SnippetType.UNDERSCORE,
-        name = "^Успешное|Успешная.*"
-)
 
 public class MainSteps {
     private int cartItems;
     private AppTest appTest;
-    public MainSteps(){appTest = new AppTest();}
 
-    public void userNavigatesToHomePage(){
-        appTest.setUp();
+    public MainSteps() {
+        appTest = new AppTest();
     }
 
-    public void userLogsIn(){
+    @И("зайти в систему как \"standard_user\"")
+    public void userLoginPage(String username) {
         LoginPage loginPage = new LoginPage(appTest.getPage());
-        loginPage.login();
+        loginPage.login(username);
     }
 
-    public void userAddProductToCartHiLo(){
+    @И("добавить в корзину {int} самых дешовых товара")
+    public void userAddProductToCartLoHi(int cartItems) {
         ShopPage shopPage = new ShopPage(appTest.getPage());
-        shopPage.clickHiLoButtonSort();
+        shopPage.clickLoHiButtonSort(cartItems);
     }
 
-    public void userAddProductToCartLoHi(){
+    @И("добавить в корзину {int} самых дорогих товара")
+    public void userAddProductCartHiLo(int cartItems) {
         ShopPage shopPage = new ShopPage(appTest.getPage());
-        shopPage.clickHiLoButtonSort();
+        shopPage.clickHiLoButtonSort(cartItems);
     }
 
-    public void checkSumBuy(){
+    @И("нажать на \"корзина\"")
+    public void userClickButtonShop() {
+        ShopPage shopPage = new ShopPage(appTest.getPage());
+        shopPage.clickShoppingCartButton();
+    }
+
+    @И("убрать из корозины самый дорогой товар")
+    public void userDeleteHiProduct() {
+        CardPage cardPage = new CardPage(appTest.getPage());
+        cardPage.deleteHiProduct();
+    }
+
+    @И("убрать из корозины самый дешевый товар")
+    public void userDeleteLoProduct() {
+        CardPage cardPage = new CardPage(appTest.getPage());
+        cardPage.deleteLoProduct();
+    }
+
+    @И("нажать на \"Checkout\"")
+    public void userClickButtonCheckout() {
+        CardPage cardPage = new CardPage(appTest.getPage());
+        cardPage.clickButtonCheckout();
+    }
+
+    @И("ввести в поле \"First Name\" данными \"Иван\"")
+
+    @И("ввести в поле \"Last Name\" данными \"Иванов\"")
+
+    @И("ввести в поле \"Postal Code\" данными \"00000000\"")
+
+
+    @И("нажать на \"Continue\"")
+    public void userClickButtonContinue() {
+
+    }
+
+    @И("нажать на \"Finish\"")
+    public void userClickButtonFinish() {
+
+    }
+
+    @И("проверить, что открылась страница \"Успешная покупка\"")
+    public void CheckFinishPage() {
 
     }
 }
+
+
