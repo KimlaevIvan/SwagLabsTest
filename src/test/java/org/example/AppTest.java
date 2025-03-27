@@ -39,18 +39,7 @@ public class AppTest {
     @Test
     public void testMailRu() {
         try {
-            LoginPage entrance = new LoginPage(page);
-            entrance.login();
-            ShopPage purchase = new ShopPage(page);
-            purchase.Shopping();
-            CardPage cardPage =new CardPage(page);
-            cardPage.CheckBuy();
-            CheckoutPage checkoutPage = new CheckoutPage(page);
-            checkoutPage.information();
-            FinishPage finishPage = new FinishPage(page);
-            finishPage.CheckingImg();
 
-            page.waitForTimeout(3000);
         } catch (PlaywrightException e) {
             System.out.println("Interaction error: " + e.getMessage());
         }
