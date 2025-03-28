@@ -3,9 +3,7 @@ package org.example.steps;
 import io.cucumber.java.bg.И;
 import io.cucumber.java.en.When;
 import org.example.AppTest;
-import org.example.model.CardPage;
-import org.example.model.LoginPage;
-import org.example.model.ShopPage;
+import org.example.model.*;
 
 
 public class MainSteps {
@@ -16,7 +14,7 @@ public class MainSteps {
         appTest = new AppTest();
     }
 
-    @И("зайти в систему как \"standard_user\"")
+    @И("зайти в систему как {string}")
     public void userLoginPage(String username) {
         LoginPage loginPage = new LoginPage(appTest.getPage());
         loginPage.login(username);
@@ -34,7 +32,7 @@ public class MainSteps {
         shopPage.clickHiLoButtonSort(cartItems);
     }
 
-    @И("нажать на \"корзина\"")
+    @И("нажать на \"Корзина\"")
     public void userClickButtonShop() {
         ShopPage shopPage = new ShopPage(appTest.getPage());
         shopPage.clickShoppingCartButton();
@@ -58,26 +56,40 @@ public class MainSteps {
         cardPage.clickButtonCheckout();
     }
 
-    @И("ввести в поле \"First Name\" данными \"Иван\"")
+    @И("ввести в поле {string} данными {string}")
+    public void userFillInfoInputFirstName(String nameInput, String testText) {
+        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
+        checkoutPage.fillInputCheckoutInput(nameInput, testText);
+    }
 
-    @И("ввести в поле \"Last Name\" данными \"Иванов\"")
+    @И("ввести в поле {string} данными {string}")
+    public void userFillInfoInputSecondName(String nameInput, String testText) {
+        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
+        checkoutPage.fillInputCheckoutInput(nameInput, testText);
+    }
 
-    @И("ввести в поле \"Postal Code\" данными \"00000000\"")
-
+    @И("ввести в поле \"{string}\" данными \"{string}\"")
+    public void userFillInfoPostalCode(String nameInput, String testText) {
+        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
+        checkoutPage.fillInputCheckoutInput(nameInput, testText);
+    }
 
     @И("нажать на \"Continue\"")
     public void userClickButtonContinue() {
-
+        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
+        checkoutPage.clickButtonContinue();
     }
 
     @И("нажать на \"Finish\"")
     public void userClickButtonFinish() {
-
+        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
+        checkoutPage.clickButtonFinish();
     }
 
     @И("проверить, что открылась страница \"Успешная покупка\"")
     public void CheckFinishPage() {
-
+        FinishPage finishPage = new FinishPage(appTest.getPage());
+        finishPage.checkPage();
     }
 }
 
