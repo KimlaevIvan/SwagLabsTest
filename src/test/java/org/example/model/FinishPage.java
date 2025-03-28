@@ -1,8 +1,8 @@
 package org.example.model;
 
 import com.microsoft.playwright.Page;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FinishPage {
     private Page page;
@@ -10,14 +10,10 @@ public class FinishPage {
     public FinishPage(Page page) {
         this.page = page;
     }
-
-    public void сheckIMG() {
-        String imgUrl = "";
-        boolean img = page.locator("//img[@src='" + imgUrl + "']").count() > 0;
-        assertTrue(img, "image should be on the page");
+    private String pageUrl = "https://www.saucedemo.com/checkout-complete.html";
+    public void checkPage() {
+        String currentUrl = page.url();
+        assertEquals(pageUrl,currentUrl);
     }
 
-    public void сheckingImg() {
-        сheckIMG();
-    }
 }
