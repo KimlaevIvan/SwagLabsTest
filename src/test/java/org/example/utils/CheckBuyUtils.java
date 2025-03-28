@@ -5,15 +5,18 @@ import com.microsoft.playwright.Page;
 public class CheckBuyUtils {
     public Page page;
 
-    public CheckBuyUtils(Page page){this.page=page;}
-    public void CheckBuy(int NumPurch,String ButtonBuy) {
+    public CheckBuyUtils(Page page) {
+        this.page = page;
+    }
+
+    public void CheckBuy(int numPurch, String buttonBuy) {
         String targetText = "Add to cart";
         int count = 0;
         for (int i = 1; i < 6; i++) {
-            if (count < NumPurch) {
-                String textButton = page.locator(String.format(ButtonBuy, i)).textContent();
+            if (count < numPurch) {
+                String textButton = page.locator(String.format(buttonBuy, i)).textContent();
                 if (targetText.equals(textButton)) {
-                    page.locator(String.format(ButtonBuy, i)).click();
+                    page.locator(String.format(buttonBuy, i)).click();
                     count++;
                 }
             }
