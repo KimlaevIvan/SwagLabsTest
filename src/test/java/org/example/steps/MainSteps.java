@@ -74,16 +74,16 @@ public class MainSteps {
         checkoutPage.fillInputCheckoutInput(nameInput, testText);
     }
 
-    @И("нажать на \"Continue\"")
-    public void userClickButtonContinue() {
+    @И("нажать на {string}")
+    public void userClickButtonContinue(String inputName) {
         CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.clickButtonContinue();
+        checkoutPage.clickButtonContinue(inputName);
     }
 
-    @И("нажать на \"Finish\"")
-    public void userClickButtonFinish() {
+    @И("нажать на {string}")
+    public void userClickButtonFinish(String inputName) {
         CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.clickButtonFinish();
+        checkoutPage.clickButtonFinish(inputName);
     }
 
     @И("проверить, что открылась страница \"Успешная покупка\"")

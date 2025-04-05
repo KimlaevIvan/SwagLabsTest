@@ -9,9 +9,9 @@ public class ShopPage {
 
     private Page page;
 
-    public ShopPage(Page page) {
-        this.page = page;
-    }
+    public ShopPage(Page page) {this.page = page;}
+
+
 
     private String shoppingCartButton = "//div[@id='shopping_cart_container']/a";
     public String sortButton = "//select[@class='product_sort_container']";
