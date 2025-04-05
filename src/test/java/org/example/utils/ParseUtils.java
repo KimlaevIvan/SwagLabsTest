@@ -18,7 +18,6 @@ public class ParseUtils {
         } else {
             System.out.println("No regex");
         }
-
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {

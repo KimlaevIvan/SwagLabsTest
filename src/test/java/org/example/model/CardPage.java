@@ -2,6 +2,7 @@ package org.example.model;
 
 import com.microsoft.playwright.Page;
 import org.example.utils.PurchaseControlUtils;
+import java.util.Map;
 
 public class CardPage {
     private Page page;
@@ -10,21 +11,23 @@ public class CardPage {
         this.page = page;
     }
 
-    public String priceCart = "(//div[@id='cart_contents_container']//div[@class='inventory_item_price'])[%d]";
-    public String buttonCart = "(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]";
-    private String buttonCheckout = "//button[@id='checkout']";
+    private Map<String ,String> locatorMap = Map.of(
+            "Price Cart","(//div[@id='cart_contents_container']//div[@class='inventory_item_price'])[%d]",
+            "Button Buy Cart ","(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",
+            "Checkout","//button[@id='checkout']"
+    );
 
     public void deleteHiProduct() {
         PurchaseControlUtils purchaseControlUtils = new PurchaseControlUtils(page);
-        page.click(String.format(buttonCart, purchaseControlUtils.priceControlMax(priceCart)));
+        page.click(String.format(locatorMap.get("Price Card"), purchaseControlUtils.priceControlMax(locatorMap.get("Price Cart"))));
     }
 
     public void deleteLoProduct() {
         PurchaseControlUtils purchaseControlUtils = new PurchaseControlUtils(page);
-        page.click(String.format(buttonCart, purchaseControlUtils.priceControlMin(priceCart)));
+        page.click(String.format(locatorMap.get("Button Buy Cart"), purchaseControlUtils.priceControlMin(locatorMap.get("Price Cart"))));
     }
 
-    public void clickButtonCheckout() {
-        page.click(buttonCheckout);
+    public void clickButtonCheckout(String value) {
+        page.click(locatorMap.get(value));
     }
 }
