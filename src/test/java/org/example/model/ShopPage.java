@@ -11,8 +11,6 @@ public class ShopPage {
 
     public ShopPage(Page page) {this.page = page;}
 
-
-
     private String shoppingCartButton = "//div[@id='shopping_cart_container']/a";
     public String sortButton = "//select[@class='product_sort_container']";
     public String buttonBuy = "(//div[@id='inventory_container'][1]//button)[%d]";

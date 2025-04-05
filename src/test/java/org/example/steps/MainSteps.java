@@ -50,10 +50,10 @@ public class MainSteps {
         cardPage.deleteLoProduct();
     }
 
-    @И("нажать на \"Checkout\"")
-    public void userClickButtonCheckout() {
+    @И("нажать на {string}")
+    public void userClickButtonCheckout(String buttonName) {
         CardPage cardPage = new CardPage(appTest.getPage());
-        cardPage.clickButtonCheckout();
+        cardPage.clickButtonCheckout(buttonName);
     }
 
     @И("ввести в поле {string} данными {string}")
@@ -75,15 +75,15 @@ public class MainSteps {
     }
 
     @И("нажать на {string}")
-    public void userClickButtonContinue(String inputName) {
+    public void userClickButtonContinue(String buttonName) {
         CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.clickButtonContinue(inputName);
+        checkoutPage.clickButtonContinue(buttonName);
     }
 
     @И("нажать на {string}")
-    public void userClickButtonFinish(String inputName) {
+    public void userClickButtonFinish(String buttonName) {
         CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.clickButtonFinish(inputName);
+        checkoutPage.clickButtonFinish(buttonName);
     }
 
     @И("проверить, что открылась страница \"Успешная покупка\"")

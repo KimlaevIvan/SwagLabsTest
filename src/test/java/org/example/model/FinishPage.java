@@ -10,10 +10,8 @@ public class FinishPage {
     public FinishPage(Page page) {
         this.page = page;
     }
-    private String pageUrl = "https://www.saucedemo.com/checkout-complete.html";
-    public void checkPage() {
-        String currentUrl = page.url();
-        assertEquals(pageUrl,currentUrl);
-    }
 
+    private String pageUrl = "https://www.saucedemo.com/checkout-complete.html";
+
+    public void checkPage() {assertEquals(pageUrl,page.url());}
 }

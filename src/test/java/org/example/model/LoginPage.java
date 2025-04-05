@@ -26,12 +26,8 @@ public class LoginPage {
         page.locator(inputMap.get(inputName)).fill(value);
     }
 
-    private String loginParsUsername() {
-        return ParseUtils.pars("login",page.locator("(//div[@id='login_credentials'])").textContent());
-    }
-    private String loginParsPassword() {
-        return ParseUtils.pars("password",page.locator("//div[@class='login_password']").textContent());
-    }
+    private String loginParsUsername() {return ParseUtils.pars("login",page.locator("(//div[@id='login_credentials'])").textContent());}
+    private String loginParsPassword() {return ParseUtils.pars("password",page.locator("//div[@class='login_password']").textContent());}
 
     public void login (String username){
         fillInput("Username", username);

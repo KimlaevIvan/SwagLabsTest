@@ -1,9 +1,6 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.microsoft.playwright.*;
-import org.example.model.*;
 import org.junit.jupiter.api.*;
 
 public class AppTest {
@@ -21,15 +18,9 @@ public class AppTest {
 
     @AfterEach
     public void tearDown() {
-        if (page != null) {
-            page.close();
-        }
-        if (browser != null) {
-            browser.close();
-        }
-        if (playwright != null) {
-            playwright.close();
-        }
+        if (page != null) {page.close();}
+        if (browser != null) {browser.close();}
+        if (playwright != null) {playwright.close();}
     }
 
     public Page getPage() {
@@ -38,10 +29,6 @@ public class AppTest {
 
     @Test
     public void testMailRu() {
-        try {
-
-        } catch (PlaywrightException e) {
-            System.out.println("Interaction error: " + e.getMessage());
-        }
+        try {} catch (PlaywrightException e) {System.out.println("Interaction error: " + e.getMessage());}
     }
 }
