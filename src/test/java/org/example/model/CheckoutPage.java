@@ -14,23 +14,13 @@ public class CheckoutPage {
     private Map<String, String> inputMap = Map.of(
             "First Name", "(//div[@class='form_group']//input)[1]",
             "Last Name", "(//div[@class='form_group']//input)[2]",
-            "Postal Code", "(//div[@class='form_group']//input)[3]"
+            "Postal Code", "(//div[@class='form_group']//input)[3]",
+            "Continue","//input[@id='continue']",
+            "Finish","//button[@id='finish']"
     );
 
-    private String continueButton = "//input[@id='continue']";
-    private String finishButton = "//button[@id='finish']";
-
-    public void fillInputCheckoutInput(String inputName,String value) {
-        page.locator(inputMap.get(inputName)).fill(value);
-    }
-
-
-    public void clickButtonContinue() {
-        page.click(continueButton);
-    }
-
-    public void clickButtonFinish() {
-        page.click(finishButton);
-    }
+    public void fillInputCheckoutInput(String inputName,String value) {page.locator(inputMap.get(inputName)).fill(value);}
+    public void clickButtonContinue(String inputName) {page.locator(inputMap.get(inputName)).click();}
+    public void clickButtonFinish(String inputName) {page.locator(inputMap.get(inputName)).click();}
 
 }
