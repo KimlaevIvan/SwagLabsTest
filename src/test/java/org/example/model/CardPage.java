@@ -1,7 +1,8 @@
 package org.example.model;
 
 import com.microsoft.playwright.Page;
-import org.example.utils.PurchaseControlUtils;
+import org.example.utils.ParseUtils;
+
 import java.util.Map;
 
 public class CardPage {
@@ -17,15 +18,37 @@ public class CardPage {
             "Checkout","//button[@id='checkout']"
     );
 
-    public void deleteHiProduct() {
-        PurchaseControlUtils purchaseControlUtils = new PurchaseControlUtils(page);
-        page.click(String.format(locatorMap.get("Price Card"), purchaseControlUtils.priceControlMax(locatorMap.get("Price Cart"))));
+    private int priceControlMax(String PriceCart) {
+        float prise;
+        float max_price = 0;
+        int index_max = 0;
+        for (int i = 1; i <= 6; i++) {
+            prise = Float.parseFloat(ParseUtils.pars("money", page.textContent(String.format(PriceCart, i))));
+            if (prise > max_price) {
+                max_price = prise;
+                index_max = i;
+            }
+        }
+        return index_max;
     }
 
-    public void deleteLoProduct() {
-        PurchaseControlUtils purchaseControlUtils = new PurchaseControlUtils(page);
-        page.click(String.format(locatorMap.get("Button Buy Cart"), purchaseControlUtils.priceControlMin(locatorMap.get("Price Cart"))));
+    private int priceControlMin(String PriceCart) {
+        float prise;
+        float min_price = 1000;
+        int index_min = 0;
+        for (int i = 1; i <= 5; i++) {
+            prise = Float.parseFloat(ParseUtils.pars("money", page.textContent(String.format(PriceCart, i))));
+            if (prise < min_price) {
+                min_price = prise;
+                index_min = i;
+            }
+        }
+        return index_min;
     }
+
+    public void deleteHiProduct() {page.click(String.format(locatorMap.get("Price Card"),priceControlMax(locatorMap.get("Price Cart"))));}
+
+    public void deleteLoProduct() {page.click(String.format(locatorMap.get("Button Buy Cart"),priceControlMin(locatorMap.get("Price Cart"))));}
 
     public void clickButtonCheckout(String value) {
         page.click(locatorMap.get(value));
