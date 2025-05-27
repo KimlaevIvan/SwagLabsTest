@@ -1,22 +1,22 @@
 package org.example;
 
 import com.microsoft.playwright.*;
-import org.junit.jupiter.api.*;
+import org.junit.*;
 
 public class AppTest {
     private Playwright playwright;
     private Browser browser;
-    private Page page;
+    private static Page page;
 
-    @BeforeEach
-    public void setUp() {
+
+    {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         page = browser.newPage();
         page.navigate("https://www.saucedemo.com/");
     }
 
-    @AfterEach
+    @After
     public void tearDown() {
         if (page != null) {page.close();}
         if (browser != null) {browser.close();}

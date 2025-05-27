@@ -41,7 +41,7 @@ public class CardPage {
 
     public void deleteLoProduct() {page.click(String.format(locatorMap.get("Button Buy Cart"),priceControlMin(locatorMap.get("Price Cart"))));}
 
-    public void clickButtonCheckout(String value) {
+    public void clickButton(String value) {
         page.click(locatorMap.get(value));
     }
 }

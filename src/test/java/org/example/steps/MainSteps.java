@@ -1,7 +1,7 @@
 package org.example.steps;
 
-import io.cucumber.java.bg.И;
-import io.cucumber.java.en.When;
+import cucumber.api.java.bg.И;
+import cucumber.api.java.en.When;
 import org.example.AppTest;
 import org.example.model.*;
 
@@ -32,10 +32,10 @@ public class MainSteps {
         shopPage.clickHiLoButtonSort(cartItems);
     }
 
-    @И("нажать на \"Корзина\"")
-    public void userClickButtonShop() {
+    @И("нажать на {string} на странице магазина")
+    public void userClickButtonShop(String button) {
         ShopPage shopPage = new ShopPage(appTest.getPage());
-        shopPage.clickShoppingCartButton();
+        shopPage.clickButton(button);
     }
 
     @И("убрать из корозины самый дорогой товар")
@@ -50,10 +50,10 @@ public class MainSteps {
         cardPage.deleteLoProduct();
     }
 
-    @И("нажать на {string}")
+    @И("нажать на {string} на странице корзины")
     public void userClickButtonCheckout(String buttonName) {
         CardPage cardPage = new CardPage(appTest.getPage());
-        cardPage.clickButtonCheckout(buttonName);
+        cardPage.clickButton(buttonName);
     }
 
     @И("ввести в поле {string} данными {string}")
@@ -62,28 +62,10 @@ public class MainSteps {
         checkoutPage.fillInputCheckoutInput(nameInput, testText);
     }
 
-    @И("ввести в поле {string} данными {string}")
-    public void userFillInfoInputSecondName(String nameInput, String testText) {
-        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.fillInputCheckoutInput(nameInput, testText);
-    }
-
-    @И("ввести в поле \"{string}\" данными \"{string}\"")
-    public void userFillInfoPostalCode(String nameInput, String testText) {
-        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.fillInputCheckoutInput(nameInput, testText);
-    }
-
     @И("нажать на {string}")
     public void userClickButtonContinue(String buttonName) {
         CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.clickButtonContinue(buttonName);
-    }
-
-    @И("нажать на {string}")
-    public void userClickButtonFinish(String buttonName) {
-        CheckoutPage checkoutPage = new CheckoutPage(appTest.getPage());
-        checkoutPage.clickButtonFinish(buttonName);
+        checkoutPage.clickButton(buttonName);
     }
 
     @И("проверить, что открылась страница \"Успешная покупка\"")
