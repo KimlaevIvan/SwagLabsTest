@@ -14,14 +14,13 @@ public class LoginPage {
 
     private Map<String,String> inputMap =  Map.of(
             "Username","//input[@id='user-name']",
-            "Password","//input[@id='password']"
+            "Password","//input[@id='password']",
+            "Button","//input[@id='login-button']"
     );
 
     private String loginButton = "//input[@id='login-button']";
 
-    public void clickLoginButton(){
-        page.click(loginButton);
-    }
+    public void clickLoginButton() {page.click(loginButton);}
     public void fillInput(String inputName,String value){
         page.locator(inputMap.get(inputName)).fill(value);
     }

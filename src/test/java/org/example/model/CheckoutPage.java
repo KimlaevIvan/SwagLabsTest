@@ -20,7 +20,6 @@ public class CheckoutPage {
     );
 
     public void fillInputCheckoutInput(String inputName,String value) {page.locator(inputMap.get(inputName)).fill(value);}
-    public void clickButtonContinue(String inputName) {page.locator(inputMap.get(inputName)).click();}
-    public void clickButtonFinish(String inputName) {page.locator(inputMap.get(inputName)).click();}
+    public void clickButton(String inputName) {page.locator(inputMap.get(inputName)).click();}
 
 }
