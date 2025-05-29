@@ -16,8 +16,8 @@ public class CardPage {
     }
 
     private Map<String ,String> locatorMap = Map.of(
-            "Price Cart","(//div[@id='cart_contents_container']//div[@class='inventory_item_price'])[%d]",
-            "Button Buy Cart ","(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",
+            "priceCart","(//div[@class='inventory_item_price'])[%d]",
+            "buttonBuyCart ","(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",
             "Checkout","//button[@id='checkout']"
     );
 
@@ -37,9 +37,9 @@ public class CardPage {
                 .orElse(0); // Если поток пустой, возвращаем 0
     }
 
-    public void deleteHiProduct() {page.click(String.format(locatorMap.get("Price Card"),priceControlMax(locatorMap.get("Price Cart"))));}
+    public void deleteHiProduct() {page.click(String.format(locatorMap.get("buttonBuyCart"),priceControlMax(locatorMap.get("priceCart"))));}
 
-    public void deleteLoProduct() {page.click(String.format(locatorMap.get("Button Buy Cart"),priceControlMin(locatorMap.get("Price Cart"))));}
+    public void deleteLoProduct() {page.click(String.format(locatorMap.get("buttonBuyCart"),priceControlMin(locatorMap.get("priceCart"))));}
 
     public void clickButton(String value) {
         page.click(locatorMap.get(value));
