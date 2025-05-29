@@ -12,9 +12,9 @@ public class ShopPage {
     public ShopPage(Page page) {this.page = page;}
 
     private Map<String,String> inputMap =  Map.of(
-            "shoppingCartButton", "//div[@id='shopping_cart_container']/a",
+            "Корзина", "//div[@id='shopping_cart_container']/a",
             "sortButton", "//select[@class='product_sort_container']",
-            "Корзина", "(//div[@id='inventory_container'][1]//button)[%d]"
+            "buyButton", "(//div[@id='inventory_container'][1]//button)[%d]"
     );
 
     public void clickButton(String button) {page.click(inputMap.get(button));}
@@ -31,12 +31,12 @@ public class ShopPage {
 
     public void clickHiLoButtonSort(int numPurch) {
         page.locator(inputMap.get("sortButton")).selectOption("hilo");
-        CheckBuy(numPurch, inputMap.get("Корзина"));
+        CheckBuy(numPurch, inputMap.get("buyButton"));
     }
 
     public void clickLoHiButtonSort(int numPurch) {
         page.locator(inputMap.get("sortButton")).selectOption("lohi");
-        CheckBuy(numPurch, inputMap.get("Корзина"));
+        CheckBuy(numPurch, inputMap.get("buyButton"));
     }
 
 
