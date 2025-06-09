@@ -17,31 +17,35 @@ public class CardPage {
 
     private Map<String ,String> locatorMap = Map.of(
             "priceCart","(//div[@class='inventory_item_price'])[%d]",
-            "buttonBuyCart ","(//div[@id='cart_contents_container']//button[text()='Remove'])[%d]",
+            "buttonBuyCart ","(//button[text()='Remove'])[%d]",
             "Checkout","//button[@id='checkout']"
     );
 
     private int priceControlMax(String PriceCart) {
+        ParseUtils parseUtils = new ParseUtils();
         return IntStream.rangeClosed(1, 6)
-                .mapToObj(i -> new AbstractMap.SimpleEntry<>(i, Float.parseFloat(ParseUtils.pars("money", page.textContent(String.format(PriceCart, i))))))
+                .mapToObj(i -> new AbstractMap.SimpleEntry<>(i, Float.parseFloat(parseUtils.pars("money", page.textContent(String.format(PriceCart, i))))))
                 .max(Comparator.comparing(AbstractMap.SimpleEntry::getValue))
                 .map(AbstractMap.SimpleEntry::getKey)
                 .orElse(0);
     }
 
     private int priceControlMin(String PriceCart) {
+        ParseUtils parseUtils = new ParseUtils();
         return IntStream.rangeClosed(1, 5)
-                .mapToObj(i -> new AbstractMap.SimpleEntry<>(i, Float.parseFloat(ParseUtils.pars("money", page.textContent(String.format(PriceCart, i))))))
+                .mapToObj(i -> new AbstractMap.SimpleEntry<>(i, Float.parseFloat(parseUtils.pars("money", page.textContent(String.format(PriceCart, i))))))
                 .min(Comparator.comparing(AbstractMap.SimpleEntry::getValue))
                 .map(AbstractMap.SimpleEntry::getKey)
                 .orElse(0); // Если поток пустой, возвращаем 0
     }
 
-    public void deleteHiProduct() {page.click(String.format(locatorMap.get("buttonBuyCart"),priceControlMax(locatorMap.get("priceCart"))));}
-
-    public void deleteLoProduct() {page.click(String.format(locatorMap.get("buttonBuyCart"),priceControlMin(locatorMap.get("priceCart"))));}
-
-    public void clickButton(String value) {
-        page.click(locatorMap.get(value));
+    public
+        void deleteHiProduct() {
+        int i = priceControlMax(locatorMap.get("priceCart"));
+        page.click(String.format(locatorMap.get("buttonBuyCart"), i));
     }
+
+    public void deleteLoProduct() {page.click(String.format(locatorMap.get("buttonBuyCart"), priceControlMin(locatorMap.get("priceCart"))));}
+
+    public void clickButton(String value) {page.click(locatorMap.get(value));}
 }
