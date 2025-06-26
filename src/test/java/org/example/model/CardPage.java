@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.assertEquals;
+
 public class CardPage {
     private Page page;
 
@@ -15,9 +17,14 @@ public class CardPage {
         this.page = page;
     }
 
+    public void testCorrectPageUrl() {
+        String expectedUrl = "https://www.saucedemo.com/cart.html"; // Ожидаемый URL
+        assertEquals("Нахожусь не на нужной странице!",expectedUrl, page.url() );
+    }
+
     private Map<String ,String> locatorMap = Map.of(
             "priceCart","(//div[@class='inventory_item_price'])[%d]",
-            "buttonBuyCart ","(//button[text()='Remove'])[%d]",
+            "buttonBuyCart","(//button[text()='Remove'])[%d]",
             "Checkout","//button[@id='checkout']"
     );
 
@@ -39,13 +46,16 @@ public class CardPage {
                 .orElse(0); // Если поток пустой, возвращаем 0
     }
 
-    public
-        void deleteHiProduct() {
+    public void deleteHiProduct() {
+        System.out.println("Текущий URL: " + page.url());
+        testCorrectPageUrl();
         int i = priceControlMax(locatorMap.get("priceCart"));
         page.click(String.format(locatorMap.get("buttonBuyCart"), i));
     }
 
-    public void deleteLoProduct() {page.click(String.format(locatorMap.get("buttonBuyCart"), priceControlMin(locatorMap.get("priceCart"))));}
+    public void deleteLoProduct() {
+        testCorrectPageUrl();
+        page.click(String.format(locatorMap.get("buttonBuyCart"), priceControlMin(locatorMap.get("priceCart"))));}
 
     public void clickButton(String value) {page.click(locatorMap.get(value));}
 }
